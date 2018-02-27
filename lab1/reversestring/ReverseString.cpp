@@ -1,7 +1,7 @@
 //
 // Created by mwypych on 02.02.17.
 //
-#include "Factorial.h"
+#include "ReverseString.h"
 
 int factorial(int value) {
   int facValue = 1;
