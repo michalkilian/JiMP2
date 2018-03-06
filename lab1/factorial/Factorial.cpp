@@ -3,10 +3,10 @@
 //
 #include "Factorial.h"
 
-int factorial(int value) {
+int Factorial(int value) {
   int facValue = 1;
-  if(value >= 13 || value <= -13) {
-    facValue = 0;
+  if(CheckOutOfRange(value)) {
+    return 0;
   }
   else if(value > 0) {
     for (int i = 2; i <= value; ++i) {
@@ -21,3 +21,5 @@ int factorial(int value) {
 
   return facValue;
 }
+
+bool CheckOutOfRange(int value) { return value >= 13 || value <= -13; }

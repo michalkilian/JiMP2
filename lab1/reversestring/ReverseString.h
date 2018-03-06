@@ -5,6 +5,6 @@
 #ifndef JIMP_EXERCISES_REVERSESTRING_H
 #define JIMP_EXERCISES_REVERSESTRING_H
 
-int factorial(int value);
+int Factorial(int value);
 
 #endif //JIMP_EXERCISES_REVERSESTRING_H

@@ -3,6 +3,6 @@
 
 int main() {
     int x = -13;
-    std::cout << "factorial of " << x << "  is: " << factorial(x) << std::endl;
+    std::cout << "Factorial of " << x << "  is: " << Factorial(x) << std::endl;
     return 0;
 }

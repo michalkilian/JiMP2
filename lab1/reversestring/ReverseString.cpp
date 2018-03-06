@@ -3,7 +3,7 @@
 //
 #include "ReverseString.h"
 
-int factorial(int value) {
+int Factorial(int value) {
   int facValue = 1;
   if(value >= 13 || value <= -13) {
     facValue = 0;
