@@ -4,67 +4,42 @@
 
 #include "XorCypherBreaker.h"
 
-std::string ChangeKey(std::string key, int counter) {
-    key[0] = 'a' + counter / (26 * 26);
-    key[1] = 'a' + counter / 26 % 26;
-    key[2] = 'a' + counter % 26;
-    return key;
-}
-
-int BackXOR(int letter, std::string key, int counter) {
-    return (key[counter - 1] ^ letter);
-}
-
-std::string XorCypherBreaker(const std::vector<char> &cryptogram,
-                             int key_length,
-                             const std::vector<std::string> &dictionary) {
+std::string
+XorCypherBreaker(const std::vector<char> &cryptogram, int key_length, const std::vector<std::string> &dictionary) {
+    char currentChar;
+    std::string decryptedWord;
     std::string key;
-    for (int i = 0; i < key_length; i++) {
-        key += "a";
-    }
-    int max = 0;
-    std::string key_max;
-    int j = 0;
-    int counter = 0;
-    while (true) {
-        counter = 0;
-        for (int i = 0; i < cryptogram.size() - 5; i++) {
-            std::string checking;
-            checking += (BackXOR(cryptogram[i], key, 1));
-            checking += (BackXOR(cryptogram[i + 1], key, 2));
-            checking += (BackXOR(cryptogram[i + 2], key, 3));
-            checking += (BackXOR(cryptogram[i + 3], key, 1));
 
+    for (char i = 'a'; i <= 'z'; i++) {
+        for (char j = 'a'; j <= 'z'; j++) {
+            for (char k = 'a'; k <= 'z'; k++) {
+                int wordsFoundInDic = 0;
+                int numberOfWords = 0;
+                int currentIndex = 0;
+                key = "";
+                key += i;
+                key += j;
+                key += k;
 
-            if (find(dictionary.begin(), dictionary.end(), checking) != dictionary.end()) {
-                counter++;
+                for (char encryptedC: cryptogram) {
+                    currentChar = encryptedC ^ key.at(currentIndex % 3);
+                    currentIndex++;
+                    if (currentChar >= 'a' && currentChar <= 'z') {
+                        decryptedWord += currentChar;
+                        continue;
+                    } else if (decryptedWord.size() != 0) {
+                        if (std::find(dictionary.begin(), dictionary.end(), decryptedWord) != dictionary.end()) {
+                            wordsFoundInDic++;
+                        }
+                        numberOfWords++;
+                        if (numberOfWords > 20 && wordsFoundInDic * 100 / numberOfWords > 35) {
+                            return key;
+                        }
+                        decryptedWord = "";
+                    }
+                }
             }
-            checking = (BackXOR(cryptogram[i], key, 1));
-            checking += (BackXOR(cryptogram[i + 1], key, 1));
-
-            if (find(dictionary.begin(), dictionary.end(), checking) != dictionary.end()) {
-                counter++;
-            }
-
-            checking = (BackXOR(cryptogram[i], key, 1));
-            checking += (BackXOR(cryptogram[i + 1], key, 1));
-            checking += (BackXOR(cryptogram[i + 2], key, 1));
-
-            if (find(dictionary.begin(), dictionary.end(), checking) != dictionary.end()) {
-                counter++;
-            }
-
-            if (counter > max) {
-                max = counter;
-                key_max = key;
-            }
-
-        }
-        key = ChangeKey(key, j);
-        j++;
-        if (key == "zzz") {
-            return key_max;
         }
     }
-
+    return key;
 }
