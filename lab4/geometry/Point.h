@@ -6,7 +6,7 @@
 #define JIMP_EXERCISES_POINT_H
 
 #include <ostream>
-namespace geometry {
+namespace geometry{
     class Point {
     public:
         //Konstruktor bezparametrowy

@@ -6,7 +6,7 @@
 #define JIMP_EXERCISES_SQUARE_H
 
 #include "Point.h"
-namespace geometry {
+namespace geometry{
 
     class Square {
     public:
@@ -17,9 +17,9 @@ namespace geometry {
         //Destruktor wykonywany przed zwolnieniem pamięci
         ~Square();
 
-        void CalculateCircumference() const;
+        void CalculateCircumference();
 
-        void CalculateArea() const;
+        void CalculateArea();
 
         double Circumference() const;
 
