@@ -36,7 +36,10 @@ namespace tinyurl {
 
     std::string Decode(const std::unique_ptr<TinyUrlCodec> &codec, const std::string &hash) {
         string url;
-        url = codec->mapa[hash];
+        if(codec->mapa.count(hash)) {
+            url = codec->mapa[hash];
+        }
+        else url = '\0';
         return url;
     }
 }
