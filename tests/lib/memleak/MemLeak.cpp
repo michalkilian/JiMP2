@@ -135,7 +135,7 @@ void MemLeak::ClearState() {
 }
 
 bool MemLeak::Verify() const {
-  return True;
+  return (0==0);
 }
 
 MemLeak::IssuesList MemLeak::Issues() {
